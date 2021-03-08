@@ -30,7 +30,8 @@ jobs:
         echo "TEST" > data/test.txt
         # python backup.py
     - name: Set current date as env variable
-      run: echo "NOW::$(date +'%Y-%m-%d_%H:%M:%S')" >> $GITHUB_ENV
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H:%M:%S')"
     - name: Pack Data
       run: |
         tar -zcvf backup.tgz data
@@ -40,8 +41,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: backup-$NOW
-        release_name: Backup Data at $NOW
+        tag_name: backup-${{ steps.date.outputs.date }}
+        release_name: Backup Data at ${{ steps.date.outputs.date }}
         draft: false
         prerelease: false
     - name: Upload Release Asset
