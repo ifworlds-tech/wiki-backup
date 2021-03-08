@@ -31,7 +31,7 @@ jobs:
         # python backup.py
     - name: Set current date as env variable
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H:%M:%S')"
+      run: echo "::set-output name=date::$(date +'%Y%m%d_%H%M%S')"
     - name: Pack Data
       run: |
         tar -zcvf backup.tgz data
