@@ -26,9 +26,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Pull Data
       run: |
-        mkdir data
-        echo "TEST" > data/test.txt
-        # python backup.py
+        python backup.py
     - name: Set current date as env variable
       id: date
       run: echo "::set-output name=date::$(date +'%Y%m%d_%H%M%S')"
